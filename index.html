@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hemanth Sai Kumar P — Data Analyst / Analytics Engineer</title>
+<meta name="description" content="Portfolio of Hemanth Sai Kumar P — data pipelines, analytics dashboards, and BI projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #12141a;
+    --ink-soft: #191c24;
+    --panel: #1d212b;
+    --line: #2b303c;
+    --text: #eae7e0;
+    --text-dim: #9a9fac;
+    --bronze: #c07a4a;
+    --bronze-dim: #6e4a34;
+    --silver: #c7ccd4;
+    --silver-dim: #6b6f78;
+    --gold: #d9b354;
+    --gold-dim: #7a662f;
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'Fraunces', serif;
+    --sans: 'Inter', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--gold-dim); color:var(--text);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- layout shell ---------- */
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+  section{padding:96px 0;}
+  @media (max-width:640px){ section{padding:64px 0;} }
+
+  /* ---------- nav ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(18,20,26,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.02em; color:var(--text-dim);
+  }
+  .brand strong{color:var(--text); font-weight:600;}
+  .tiers{display:flex; gap:28px; font-family:var(--mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase;}
+  .tiers a{color:var(--text-dim); text-decoration:none; padding:4px 0; border-bottom:1px solid transparent; transition:color .2s, border-color .2s;}
+  .tiers a:hover, .tiers a:focus-visible{color:var(--text); border-color:var(--gold);}
+  .tiers .t-bronze:hover{border-color:var(--bronze); color:var(--bronze);}
+  .tiers .t-silver:hover{border-color:var(--silver); color:var(--silver);}
+  .tiers .t-gold:hover{border-color:var(--gold); color:var(--gold);}
+  @media (max-width:640px){ .tiers{gap:16px; font-size:10px;} }
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:160px; padding-bottom:80px;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--bronze); margin-bottom:20px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:8px; height:8px; background:var(--bronze); border-radius:50%; display:inline-block;}
+  h1{
+    font-family:var(--serif); font-weight:600; font-size:clamp(38px, 6vw, 64px);
+    line-height:1.05; letter-spacing:-0.01em; margin-bottom:20px;
+  }
+  .role{
+    font-family:var(--serif); font-style:italic; font-weight:400; color:var(--text-dim);
+    font-size:clamp(18px, 2.4vw, 24px); margin-bottom:36px;
+  }
+
+  .terminal{
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    font-family:var(--mono); font-size:13px; overflow:hidden; margin-bottom:40px;
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:6px; padding:10px 14px; border-bottom:1px solid var(--line);
+    background:var(--ink-soft);
+  }
+  .dot{width:9px; height:9px; border-radius:50%;}
+  .dot.r{background:#5c4a44;} .dot.y{background:#5c5644;} .dot.g{background:#445c4c;}
+  .terminal-title{margin-left:8px; color:var(--text-dim); font-size:11px;}
+  .terminal-body{padding:18px 20px; color:var(--silver); min-height:130px;}
+  .terminal-line{opacity:0; animation:reveal .4s forwards;}
+  .terminal-line .ok{color:var(--gold);}
+  .cursor{display:inline-block; width:7px; height:14px; background:var(--gold); vertical-align:middle; animation:blink 1s step-end infinite;}
+  @keyframes reveal{to{opacity:1;}}
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero-links{display:flex; flex-wrap:wrap; gap:14px;}
+  .btn{
+    font-family:var(--mono); font-size:13px; padding:10px 18px; border-radius:6px;
+    text-decoration:none; border:1px solid var(--line); color:var(--text);
+    transition:border-color .2s, transform .2s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover{border-color:var(--gold); transform:translateY(-1px);}
+  .btn.primary{background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:600;}
+  .btn.primary:hover{background:#e6c46a;}
+
+  /* ---------- section headers ---------- */
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:40px;}
+  .sec-tag{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    padding:4px 10px; border-radius:4px; white-space:nowrap;
+  }
+  .sec-tag.bronze{color:var(--bronze); border:1px solid var(--bronze-dim);}
+  .sec-tag.silver{color:var(--silver); border:1px solid var(--silver-dim);}
+  .sec-tag.gold{color:var(--gold); border:1px solid var(--gold-dim);}
+  .sec-head h2{font-family:var(--serif); font-weight:600; font-size:clamp(24px,3vw,32px);}
+  .sec-sub{color:var(--text-dim); font-size:15px; max-width:60ch; margin-bottom:40px; margin-top:-24px;}
+
+  /* ---------- about (bronze) ---------- */
+  #about{border-top:1px solid var(--line);}
+  .about-body{max-width:66ch; color:var(--text-dim); font-size:16px;}
+  .about-body strong{color:var(--text); font-weight:600;}
+  .about-facts{display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-top:36px;}
+  @media (max-width:560px){.about-facts{grid-template-columns:1fr;}}
+  .fact{border-left:2px solid var(--bronze-dim); padding-left:16px;}
+  .fact-label{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--bronze); margin-bottom:6px;}
+  .fact-val{font-size:14px; color:var(--text-dim);}
+
+  /* ---------- skills (silver) ---------- */
+  #skills{border-top:1px solid var(--line);}
+  .skill-grid{display:grid; gap:22px;}
+  .skill-row{
+    display:grid; grid-template-columns:160px 1fr; gap:20px; align-items:start;
+    padding:18px 0; border-bottom:1px solid var(--line);
+  }
+  @media (max-width:600px){.skill-row{grid-template-columns:1fr; gap:8px;}}
+  .skill-label{font-family:var(--mono); font-size:12px; color:var(--silver); text-transform:uppercase; letter-spacing:0.06em; padding-top:6px;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:var(--mono); font-size:13px; padding:6px 12px; border-radius:5px;
+    background:var(--panel); border:1px solid var(--line); color:var(--text);
+  }
+
+  /* ---------- projects (gold) ---------- */
+  #projects{border-top:1px solid var(--line);}
+  .project{
+    border:1px solid var(--line); border-radius:10px; background:var(--panel);
+    padding:32px; margin-bottom:24px; transition:border-color .25s;
+  }
+  .project:hover{border-color:var(--gold-dim);}
+  .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:6px; flex-wrap:wrap;}
+  .project-name{font-family:var(--serif); font-weight:600; font-size:20px;}
+  .project-date{font-family:var(--mono); font-size:12px; color:var(--gold); white-space:nowrap; padding-top:4px;}
+  .project-stack{font-family:var(--mono); font-size:12px; color:var(--text-dim); margin-bottom:18px;}
+  .project ul{list-style:none;}
+  .project li{position:relative; padding-left:18px; margin-bottom:10px; color:var(--text-dim); font-size:14.5px;}
+  .project li::before{content:'—'; position:absolute; left:0; color:var(--gold-dim);}
+  .project-links{margin-top:18px; display:flex; gap:14px;}
+  .project-links a{font-family:var(--mono); font-size:12.5px; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold-dim);}
+  .project-links a:hover{border-color:var(--gold);}
+  .flagship-tag{
+    font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase;
+    background:var(--gold); color:var(--ink); padding:3px 8px; border-radius:4px; font-weight:600;
+  }
+
+  /* ---------- certifications ---------- */
+  #certs{border-top:1px solid var(--line);}
+  .cert-list{display:flex; flex-direction:column; gap:0;}
+  .cert{
+    display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center;
+    padding:18px 0; border-bottom:1px solid var(--line);
+  }
+  .cert-name{font-weight:600; font-size:15px;}
+  .cert-issuer{font-family:var(--mono); font-size:12px; color:var(--text-dim); margin-top:3px;}
+  .cert-date{font-family:var(--mono); font-size:12px; color:var(--gold); white-space:nowrap;}
+  /* Copy the .cert block above to add a new certification — that's the only markup you need to duplicate. */
+
+  /* ---------- activity strip ---------- */
+  .activity{
+    display:flex; flex-wrap:wrap; gap:12px 28px; margin-top:32px;
+    font-family:var(--mono); font-size:13px; color:var(--text-dim);
+  }
+  .activity span strong{color:var(--text);}
+
+  /* ---------- contact / footer ---------- */
+  footer{border-top:1px solid var(--line); padding:80px 0 48px;}
+  footer h2{font-family:var(--serif); font-weight:600; font-size:clamp(28px,4vw,40px); margin-bottom:16px;}
+  footer p{color:var(--text-dim); max-width:50ch; margin-bottom:32px;}
+  .contact-links{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:64px;}
+  .foot-note{font-family:var(--mono); font-size:12px; color:var(--text-dim); opacity:0.6;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">hemanth<strong>sk</strong>/portfolio</div>
+    <div class="tiers">
+      <a href="#about" class="t-bronze">Bronze</a>
+      <a href="#skills" class="t-silver">Silver</a>
+      <a href="#projects" class="t-gold">Gold</a>
+      <a href="#certs">Certs</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Bengaluru-bound · Open to work</div>
+    <h1>Hemanth Sai Kumar P.</h1>
+    <div class="role">Data Analyst &amp; Analytics Engineer — pipelines to insights.</div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="terminal-title">profile.log</span>
+      </div>
+      <div class="terminal-body" id="termBody"></div>
+    </div>
+
+    <div class="hero-links">
+      <a class="btn primary" href="mailto:p.hemanth.sk@gmail.com">Email me ↗</a>
+      <a class="btn" href="https://github.com/0iamhsk0" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://linkedin.com/in/hemanth-sai-kumar-p/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= BRONZE — RAW LAYER: ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag bronze">Bronze</span>
+      <h2>Raw profile</h2>
+    </div>
+    <p class="about-body">
+      B.Tech CSE graduate from <strong>Lovely Professional University</strong> (2026), building toward
+      Data Analyst / Analytics Engineer / Data Engineer roles. I like taking data from messy and unstructured
+      to <strong>clean, modeled, and business-ready</strong> — the same Bronze → Silver → Gold logic this
+      page borrows its structure from. Comfortable across the stack: ingestion, transformation, warehousing,
+      and the dashboard someone actually opens on a Monday morning.
+    </p>
+    <div class="about-facts">
+      <div class="fact">
+        <div class="fact-label">Education</div>
+        <div class="fact-val">B.Tech CSE, LPU — CGPA 7.46</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Based in</div>
+        <div class="fact-val">India — targeting Bengaluru</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Focus</div>
+        <div class="fact-val">Data Analytics · Analytics Engineering · Data Engineering</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Currently</div>
+        <div class="fact-val">Actively interviewing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SILVER — REFINED LAYER: SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag silver">Silver</span>
+      <h2>Refined &amp; validated</h2>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-row">
+        <div class="skill-label">Languages</div>
+        <div class="chips">
+          <span class="chip">Python (Pandas, NumPy, PySpark)</span>
+          <span class="chip">SQL (MySQL, PostgreSQL)</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">Data Engineering</div>
+        <div class="chips">
+          <span class="chip">Apache Spark</span>
+          <span class="chip">Kafka / Redpanda</span>
+          <span class="chip">Databricks</span>
+          <span class="chip">Delta Lake</span>
+          <span class="chip">ETL</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">Visualization &amp; BI</div>
+        <div class="chips">
+          <span class="chip">Power BI</span>
+          <span class="chip">Tableau</span>
+          <span class="chip">Streamlit</span>
+          <span class="chip">Excel (Advanced)</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">Cloud &amp; DevOps</div>
+        <div class="chips">
+          <span class="chip">AWS S3</span>
+          <span class="chip">Azure Fundamentals</span>
+          <span class="chip">Docker</span>
+          <span class="chip">Git</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">AI &amp; Other</div>
+        <div class="chips">
+          <span class="chip">Gemini API</span>
+          <span class="chip">GenAI</span>
+          <span class="chip">Machine Learning</span>
+          <span class="chip">DBMS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GOLD — BUSINESS-READY: PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag gold">Gold</span>
+      <h2>Business-ready work</h2>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div class="project-name">Real-Time Crypto Market Analytics Pipeline <span class="flagship-tag">Flagship</span></div>
+        <div class="project-date">Jul 2026</div>
+      </div>
+      <div class="project-stack">Python · PySpark Structured Streaming · Redpanda · Docker · PostgreSQL · Streamlit · Gemini API</div>
+      <ul>
+        <li>Engineered a real-time ingestion pipeline streaming live Binance trade data across 5 pairs into Redpanda, processed via PySpark Structured Streaming with rolling Z-score anomaly detection.</li>
+        <li>Persisted window aggregates and anomaly flags into PostgreSQL via idempotent, at-least-once upserts.</li>
+        <li>Built a Streamlit dashboard integrating the Gemini API for batched market commentary, cutting API calls 5x within free-tier limits.</li>
+      </ul>
+      <div class="project-links">
+        <a href="https://github.com/0iamhsk0" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div class="project-name">E-Commerce Sales Analytics Data Pipeline</div>
+        <div class="project-date">Dec 2025</div>
+      </div>
+      <div class="project-stack">Databricks · Apache Spark · Spark SQL</div>
+      <ul>
+        <li>Built an end-to-end Medallion Architecture (Bronze-Silver-Gold) pipeline processing 100K+ transactions.</li>
+        <li>Implemented Silver-layer data quality checks and validation to improve reliability for downstream analytics.</li>
+        <li>Designed Gold-layer fact &amp; dimension models enabling ₹3.4B revenue analysis across customers and channels.</li>
+        <li>Developed Databricks SQL dashboards to evaluate revenue trends and coupon impact.</li>
+      </ul>
+      <div class="project-links">
+        <a href="https://github.com/0iamhsk0" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div class="project-name">Customer Shopping Trends Analytics</div>
+        <div class="project-date">Nov 2025</div>
+      </div>
+      <div class="project-stack">Python · Pandas · PostgreSQL · Power BI</div>
+      <ul>
+        <li>Performed EDA on ~4,000 customer records, uncovering key spending patterns and product category trends.</li>
+        <li>Cleaned transactional data with Pandas and loaded it into PostgreSQL via SQLAlchemy for querying.</li>
+        <li>Built a Power BI dashboard delivering KPI insights on revenue trends and customer behaviour.</li>
+      </ul>
+      <div class="project-links">
+        <a href="https://github.com/0iamhsk0" target="_blank" rel="noopener">View on GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CERTIFICATIONS ================= -->
+<section id="certs">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag gold">Proof</span>
+      <h2>Certifications</h2>
+    </div>
+    <p class="sec-sub">To add a new one later: copy a <code>.cert</code> block in the HTML and edit the three lines — name, issuer, date.</p>
+
+    <div class="cert-list">
+      <div class="cert">
+        <div>
+          <div class="cert-name">SAP Certified — Data Analyst, SAP Analytics Cloud</div>
+          <div class="cert-issuer">SAP</div>
+        </div>
+        <div class="cert-date">Mar 2026</div>
+      </div>
+
+      <div class="cert">
+        <div>
+          <div class="cert-name">IBM AI Engineering Professional Certificate</div>
+          <div class="cert-issuer">Coursera / IBM</div>
+        </div>
+        <div class="cert-date">Aug 2025</div>
+      </div>
+
+      <!-- ADD NEW CERTIFICATIONS BELOW THIS LINE — duplicate the block above and edit -->
+
+    </div>
+
+    <div class="activity">
+      <span><strong>300+</strong> DSA &amp; SQL problems — LeetCode, HackerRank, DataLemur</span>
+      <span>Active member, <strong>Indian Data Club</strong></span>
+      <span>Participant, <strong>Databricks AI Challenge</strong></span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk data.</h2>
+    <p>Open to Data Analyst, Analytics Engineer, and Data Engineer roles — Bengaluru preferred, remote considered. Reach out directly, I reply fast.</p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:p.hemanth.sk@gmail.com">p.hemanth.sk@gmail.com</a>
+      <a class="btn" href="https://github.com/0iamhsk0" target="_blank" rel="noopener">github.com/0iamhsk0</a>
+      <a class="btn" href="https://linkedin.com/in/hemanth-sai-kumar-p/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="tel:+918340065854">+91 83400 65854</a>
+    </div>
+    <div class="foot-note">Built with Bronze → Silver → Gold, same as the pipelines above.</div>
+  </div>
+</footer>
+
+<script>
+  // Hero terminal type-in sequence
+  const lines = [
+    "$ loading profile.json ...",
+    "  &gt; 3 projects indexed <span class=\"ok\">[ok]</span>",
+    "  &gt; skills refined across 5 categories <span class=\"ok\">[ok]</span>",
+    "  &gt; 2 certifications verified <span class=\"ok\">[ok]</span>",
+    "$ status: ready for opportunities <span class=\"ok\">▸</span>"
+  ];
+  const body = document.getElementById('termBody');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function renderStatic(){
+    body.innerHTML = lines.map(l => `<div>${l}</div>`).join('');
+  }
+
+  if(reduce){
+    renderStatic();
+  } else {
+    let i = 0;
+    function next(){
+      if(i >= lines.length){
+        const c = document.createElement('span');
+        c.className = 'cursor';
+        body.appendChild(c);
+        return;
+      }
+      const div = document.createElement('div');
+      div.className = 'terminal-line';
+      div.innerHTML = lines[i];
+      div.style.animationDelay = '0ms';
+      body.appendChild(div);
+      i++;
+      setTimeout(next, 380);
+    }
+    next();
+  }
+</script>
+
+</body>
+</html>

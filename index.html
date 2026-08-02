@@ -76,11 +76,12 @@
   .hero-top{display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;}
   .hero-text{flex:1; min-width: 200px;}
   .hero-pic{
-    width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--gold-dim);
+    width: 160px; height: 160px; /* Changed from 120px */
+    border-radius: 50%; border: 4px solid var(--gold-dim); /* Increased border slightly too */
     object-fit: cover; background: var(--panel);
   }
   @media (max-width: 640px) {
-    .hero-pic{width: 80px; height: 80px;}
+    .hero-pic{width: 110px; height: 110px;} /* Changed from 80px */
   }
   .eyebrow{
     font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
